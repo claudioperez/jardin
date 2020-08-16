@@ -1,4 +1,4 @@
-# jarin
+# jardin
 
 Utility for taking the Cartesian product of a JSON schema file.
 
