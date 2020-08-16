@@ -7,7 +7,7 @@ Utility for taking the Cartesian product of a JSON schema file.
     Generate a JSON array of all possible objects that satisfy a given schema
     satisfying a subset of JSON schema draft 2019-09.
 
-      -f, --verbose              Produce flat JSON output
+      -f, --flatJSON             Produce flat JSON output
       -o, --output=OUTFILE       Output to OUTFILE instead of to standard output
       -v, --verbose              Produce verbose output
       -?, --help                 Give this help list
