@@ -41,9 +41,9 @@ CC      := gcc
 # 	$(CC) -o $@ $(LIBS) $^ $(CCFLAGS) $(LDFLAGS)
 
 jardin: jardin.o
-	$(CC) -o bin/jardin jardin.c libjansson.a
+	$(CC) -o bin/jardin.out jardin.c libjansson.a
 
-test: jardin.out 
+test: bin/jardin.out 
 	$(CC) -o bin/jardin jardin.c libjansson.a
-	./jardin tests/uq.schema.json > /dev/null
+	./bin/jardin tests/uq.schema.json > /dev/null
 
