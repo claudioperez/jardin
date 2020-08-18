@@ -166,22 +166,6 @@
     "oneOf": [
         {"properties":
             {"uqEngine":{"const": "Dakota"},
-             "uqType":  {"const": "Forward Propagation"}},
-         "required": ["samplingMethodData"]},
-        {"properties":
-            {"uqEngine":{"const": "Dakota"},
-             "uqType":  {"const": "Sensitivity Analysis"}},
-         "required": ["samplingMethodData"]}, 
-        {"properties":
-            {"uqEngine":{"const": "Dakota"},
-             "uqType":  {"const": "Reliability Analysis"}},
-         "required": ["reliabilityMethodData"]},
-        {"properties":
-            {"uqEngine":{"const": "Dakota"},
-             "uqType":  {"const": "Inverse Problem"}},
-         "required": ["bayesianCalibrationMethodData"]},
-        {"properties":
-            {"uqEngine":{"const": "Dakota"},
              "uqType":  {"const": "Parameter Estimation"}},
          "required": ["calibrationMethodData"]}
     ]
