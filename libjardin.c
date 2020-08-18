@@ -3,13 +3,33 @@
 #include <string.h>
 #include "jansson.h"
 
+// void cartesianProduct(json_t *prefix, json_t *pools, size_t offset, json_t *res) {
+//     //3
+//   if (offset >= json_array_size(pools)) {
+//     json_array_append(res ,prefix);
+//     return;
+//   }
+//   json_t *pool = json_array_get(pools, offset);
 
+//   int i; json_t *item;
+//   json_array_foreach(pool,i,item) {
+//     json_t *array = json_copy(prefix);
+
+//     json_array_append_new(array,item);
+//     // json_t *sub = json_pack("[o]", item);
+//     // int k; json_t *item2;
+//     // json_array_foreach(sub,k,item2)
+//     //     json_array_append(array, item2);
+//     // json_decref(sub);
+
+//     cartesianProduct(array, pools, offset + 1, res);
+//   }
+// }
 
 
 void cartesianProduct(json_t *prefix, json_t *pools, size_t offset, json_t *res) {
     //3
   if (offset >= json_array_size(pools)) {
-    // json_array_append_new(res ,prefix);
     json_array_append(res ,prefix);
     return;
   }
@@ -18,15 +38,8 @@ void cartesianProduct(json_t *prefix, json_t *pools, size_t offset, json_t *res)
   int i; json_t *item;
   json_array_foreach(pool,i,item) {
     json_t *array = json_copy(prefix);
-
-    json_t *sub = json_pack("[o]", item);
-    int k; json_t *item2;
-    json_array_foreach(sub,k,item2)
-        json_array_append(array, item2);
-    json_decref(sub);
+    json_array_append_new(array,item);
     cartesianProduct(array, pools, offset + 1, res);
-    // json_incref(res);
-    // json_decref(array);
   }
 }
 
