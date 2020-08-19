@@ -32,6 +32,7 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 *******************************************************************************/
 
 #include <stdio.h>
@@ -43,21 +44,21 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "libjardin.h"
 
 
-
 const char *argp_program_version = "jardin-v0.0.0";
 const char *argp_program_bug_address = "<claudioperezii@outlook.com>";
 static char doc[] = "Generate a JSON array of all possible objects that "
                     "satisfy a given schema satisfying a subset of JSON "
                     "schema draft 2019-09.";
 
-
 static char args_doc[] = "FILE\nFILE1 FILE2";
 static struct argp_option options[] = { 
-    {"verbose",   'v', 0, 0, "Produce verbose output"},
-    {"debug",     'd', 0, 0, "Produce output for debugging"},
+    {0,0,0,0,"Input formats:",7},
     {"is-schema", 's', 0, 0, "Parse input file as JSON schema"},
     {"is-object", 'j', 0, 0, "Parse input file as JSON object"},
     {"is-array",  'a', 0, 0, "Parse input file as JSON array"},
+    {0,0,0,0,"Operation:",-1},
+    {"verbose",   'v', 0, 0, "Produce verbose output"},
+    {"debug",     'd', 0, 0, "Produce output for debugging"},
     {"flatJSON",  'f', 0, 0, "Produce flat JSON output"},
     {"output",    'o', "OUTFILE", 0,
     "Output to OUTFILE instead of to standard output"},
@@ -123,7 +124,6 @@ int main(int argc, char **argv) {
 
   const char *prev = NULL;
   char *filename;
-  // json_t *list_variations = json_pack("[{}]");
   while ((filename=argz_next(arguments.argz,arguments.argz_len,prev))) {
     const char *inputFile = filename;
     json_t *parent = json_pack("{}");
@@ -147,7 +147,6 @@ int main(int argc, char **argv) {
       printf("SCHEMA\n");
       const char *parent_key = "\0";
       variations = parseVariations(rootSchema, parent, parent_key);
-      // json_decref(parent);
     }
 
     if (arguments.outfile) {
@@ -174,10 +173,6 @@ int main(int argc, char **argv) {
     prev = filename;
   }
   free (arguments.argz);
-    // json_decref(variations);
-  // json_decref(list_variations);
-
-
   return 0;
 }
 

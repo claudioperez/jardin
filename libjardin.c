@@ -1,3 +1,39 @@
+/*******************************************************************************
+Modified BSD License
+
+Copyright (c) 2020, Claudio Perez. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+4. Trademarks. This License does not grant permission to use the trade names, 
+   trademarks, service marks, or product names of the Licensor, except as 
+   required for reasonable and customary use in describing the origin of the 
+   Work and reproducing the content of the NOTICE file.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+*******************************************************************************/
 
 #include <stdio.h>
 #include <string.h>
@@ -99,9 +135,7 @@ json_t *parseVariations(json_t *schema, json_t *parent, const char *parent_key){
           printf("ERROR: Ambiguous Schema.");
           exit(-1);
         }
-       // json_decref(prop); 
         json_decref(STR_OBJECT);
-        // json_decref(prop_key)
       }
       int num_schemas = json_array_size(prop_schemas);
       if (num_schemas) {
@@ -113,7 +147,6 @@ json_t *parseVariations(json_t *schema, json_t *parent, const char *parent_key){
           json_t *prop_schema_variations = parseVariations(prop, variation_parent, prop_key);
           json_array_extend(variations, prop_schema_variations);
           json_decref(prop_schema_variations);
-          // json_decref(prop);
         }
       }
       else if (json_object_size(enum_props)) {
