@@ -150,7 +150,7 @@ json_t *parseVariations(json_t *schema, json_t *parent, const char *parent_key){
     }
     json_t *enum_variations = objProduct(enum_props, variation_parent);
     json_array_extend(variations, enum_variations);
-    // json_decref(enum_variations);
+    json_decref(enum_variations);
     // json_decref(enum_props);
     json_decref(variation_parent);
   }
