@@ -1,11 +1,15 @@
 ---
-title: jardin
+title: jardín
 description: Utility for taking the Cartesian product of a JSON schema file.
 ...
 
-<h1><img src="main.svg" alt="" width=75></img>jardin</h1>
+<h1><img src="main.svg" alt="" width=75></img>jardín</h1>
 
 Utility for taking the Cartesian product of a JSON schema file.
+
+-----
+
+    $ jardin --help
 
     Usage: jardin [OPTION...] FILE
       or:  jardin [OPTION...] FILE1 FILE2
