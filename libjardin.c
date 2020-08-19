@@ -56,7 +56,7 @@ json_t *product(json_t *pools) {
 json_t *objProduct(json_t * obj, json_t * parent) {
   json_t * keys = json_array();
   const char *key ; json_t * val;
-  json_object_foreach(obj,key,val) json_array_append(keys,json_string(key));
+  json_object_foreach(obj,key,val) json_array_append_new(keys,json_string(key));
 
   json_t *dict_values = json_array();
   const char *k ; json_t * v;
@@ -77,6 +77,7 @@ json_t *objProduct(json_t * obj, json_t * parent) {
     json_decref(var);
   }
   json_decref(prod);
+  json_decref(keys);
   return out;
 }
 
