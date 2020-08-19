@@ -1,4 +1,9 @@
-# jardin
+---
+title: jardin
+description: Utility for taking the Cartesian product of a JSON schema file.
+...
+
+<h1><img src="main.svg" alt="" width=75></img>jardin</h1>
 
 Utility for taking the Cartesian product of a JSON schema file.
 
