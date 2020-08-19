@@ -75,6 +75,7 @@ json_t *objProduct(json_t * obj, json_t * parent) {
     json_array_append(out,var);
     json_decref(var);
   }
+  json_decref(prod);
   return out;
 }
 
