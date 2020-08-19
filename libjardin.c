@@ -29,7 +29,6 @@ json_t *product(json_t *pools) {
   return res;
 }
 
-
 json_t *objProduct(json_t * obj, json_t * parent) {
   json_t * keys = json_array();
   const char *key ; json_t * val;
@@ -145,11 +144,12 @@ json_t *parseVariations(json_t *schema, json_t *parent, const char *parent_key){
       
       else if (!json_equal(json_object_get(prop,"type"), STR_OBJECT) && json_object_get(prop,"default")) 
           json_object_set(variation_parent,key,json_object_get(prop,"default"));
-      
       json_decref(STR_OBJECT);
     }
     json_t *enum_variations = objProduct(enum_props, variation_parent);
     json_array_extend(variations, enum_variations);
+
+    /*memory management*/
     json_decref(enum_variations);
     json_decref(enum_props);
     json_decref(variation_parent);

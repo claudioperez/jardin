@@ -119,63 +119,65 @@ int main(int argc, char **argv) {
 
   /* parse arguments */
   json_t *variations;
-  if (argp_parse(&argp,argc,argv,0,0,&arguments)==0) {
-    const char *prev = NULL;
-    char *filename;
-    // json_t *list_variations = json_pack("[{}]");
-    while ((filename=argz_next(arguments.argz,arguments.argz_len,prev))) {
-      const char *inputFile = filename;
-      json_t *parent = json_pack("{}");
+  argp_parse(&argp,argc,argv,0,0,&arguments);
 
-      json_error_t error;
-      json_t *rootSchema = json_load_file(inputFile, 0, &error);
-      if (!rootSchema) {
-          printf("Error: JSON loader failed to open file.\n");
-          exit(-1);
-      }
-      if (arguments.is_object) {
-        printf("OBJECT\n");
-        // json_dumpf(rootSchema, stdout, JSON_INDENT(4));
-        variations = objProduct(rootSchema, parent);
-      }
-      else if (arguments.is_array) {
-        printf("ARRAY\n");
-        variations = product(rootSchema);
-      }
-      else if (arguments.is_schema) {
-        printf("SCHEMA\n");
-        const char *parent_key = "\0";
-        variations = parseVariations(rootSchema, parent, parent_key);
-        // json_decref(parent);
-      }
-      
-      if (arguments.outfile) {
-        /* output to file provided */
-        outstream = fopen (arguments.outfile, "w");
-        if (arguments.debug) 
-          printf("DEBUG: Output array size: %ld", json_array_size(variations));
-        else
-          json_dumpf(variations, outstream, JSON_INDENT(4));
-        fclose(outstream);
-      }
-      else {
-        /* output to stdout stream */
-        outstream = stdout;
-        if (arguments.debug) 
-          printf("DEBUG: Output array size: %ld", json_array_size(variations));
-        else
-          json_dumpf(variations, outstream, JSON_INDENT(4));
-        printf("\n");
-      }
-      json_decref(variations);
-      json_decref(parent);
-      json_decref(rootSchema);
-      prev = filename;
+  const char *prev = NULL;
+  char *filename;
+  // json_t *list_variations = json_pack("[{}]");
+  while ((filename=argz_next(arguments.argz,arguments.argz_len,prev))) {
+    const char *inputFile = filename;
+    json_t *parent = json_pack("{}");
+
+    json_error_t error;
+    json_t *rootSchema = json_load_file(inputFile, 0, &error);
+    if (!rootSchema) {
+        printf("Error: JSON loader failed to open file.\n");
+        exit(-1);
     }
-      // json_decref(variations);
-    // json_decref(list_variations);
+    if (arguments.is_object) {
+      printf("OBJECT\n");
+      // json_dumpf(rootSchema, stdout, JSON_INDENT(4));
+      variations = objProduct(rootSchema, parent);
+    }
+    else if (arguments.is_array) {
+      printf("ARRAY\n");
+      variations = product(rootSchema);
+    }
+    else if (arguments.is_schema) {
+      printf("SCHEMA\n");
+      const char *parent_key = "\0";
+      variations = parseVariations(rootSchema, parent, parent_key);
+      // json_decref(parent);
+    }
 
+    if (arguments.outfile) {
+      /* output to file provided */
+      outstream = fopen (arguments.outfile, "w");
+      if (arguments.debug) 
+        printf("DEBUG: Output array size: %ld", json_array_size(variations));
+      else
+        json_dumpf(variations, outstream, JSON_INDENT(4));
+      fclose(outstream);
+    }
+    else {
+      /* output to stdout stream */
+      outstream = stdout;
+      if (arguments.debug) 
+        printf("DEBUG: Output array size: %ld", json_array_size(variations));
+      else
+        json_dumpf(variations, outstream, JSON_INDENT(4));
+      printf("\n");
+    }
+    json_decref(variations);
+    json_decref(parent);
+    json_decref(rootSchema);
+    prev = filename;
   }
+  free (arguments.argz);
+    // json_decref(variations);
+  // json_decref(list_variations);
+
+
   return 0;
 }
 
