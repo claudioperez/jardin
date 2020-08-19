@@ -38,8 +38,9 @@ void cartesianProduct(json_t *prefix, json_t *pools, size_t offset, json_t *res)
   int i; json_t *item;
   json_array_foreach(pool,i,item) {
     json_t *array = json_copy(prefix);
-    json_array_append_new(array,item);
+    json_array_append(array,item);
     cartesianProduct(array, pools, offset + 1, res);
+    json_decref(array);
   }
 }
 
