@@ -1,13 +1,16 @@
 ---
 title: jardín
-description: Utility for taking the Cartesian product of a JSON schema file.
+description: A C/C++ library and command-line utility for recursively generating variations of JSON structures.
 ...
 
 <h1><img src="main.svg" alt="" width=75></img>jardín</h1>
 
-Utility for taking the Cartesian product of a JSON schema file.
+A C/C++ library and command line utility for recursively generating variations of JSON structures.
 
 -----
+
+Jardín recursively walks a given JSON structure and generates an array of all possible variations. 
+
 
     $ jardin --help
 
@@ -58,4 +61,10 @@ Utility for taking the Cartesian product of a JSON schema file.
       {"seed": 3, "method": "lhs"},
       {"seed": 3, "method": "monte carlo"}
     ]
+
+## To-Do
+
+- [ ] add option to read from stdin.
+- [ ] fix field names.
+- [ ] add ability to nest flat json file.
 
