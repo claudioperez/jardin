@@ -58,29 +58,25 @@ CC      := gcc
 jardin: main.c libjardin.c
 	$(CC) -o bin/jardin main.c libjardin.c libjansson.a
 
-test: main.c  libjardin.c#bin/jardin.out 
+schema-test: main.c  libjardin.c#bin/jardin.out 
 	$(CC) -o bin/jardin main.c libjardin.c libjansson.a
 	./bin/jardin $(d) tests/uq.schema.json #> /dev/null
 	./bin/jardin -d tests/uq.schema.json
 
-debug: main.c  libjardin.c
+schema-debug: main.c  libjardin.c
 	$(CC) -o bin/jardin main.c libjardin.c libjansson.a -Wall -ggdb3
 	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --show-reachable=yes --num-callers=20 --track-origins=yes --track-fds=yes ./bin/jardin $(d) tests/uq.schema.json
 	./bin/jardin -d tests/uq.schema.json
 
-obj: main.c  libjardin.c
+object-test: main.c  libjardin.c
 	$(CC) -o bin/jardin main.c libjardin.c libjansson.a -Wall -ggdb3
-# ifdef $(val)
 	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --show-reachable=yes --num-callers=20 --track-origins=yes --track-fds=yes ./bin/jardin $(d) -j tests/object.json
-# endif 
 	./bin/jardin  -j tests/object.json
 	./bin/jardin -d -j tests/object.json
 
-ary: main.c  libjardin.c
+array-test: main.c  libjardin.c
 	$(CC) -o bin/jardin main.c libjardin.c libjansson.a -Wall -ggdb3
-# ifdef $(val)
 	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --show-reachable=yes --num-callers=20 --track-origins=yes --track-fds=yes -v ./bin/jardin $(d) -a tests/array.json
-# endif
 	./bin/jardin  -a tests/array.json
 	./bin/jardin -d -a tests/array.json
 
