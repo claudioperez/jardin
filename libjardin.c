@@ -3,29 +3,6 @@
 #include <string.h>
 #include "jansson.h"
 
-// void cartesianProduct(json_t *prefix, json_t *pools, size_t offset, json_t *res) {
-//     //3
-//   if (offset >= json_array_size(pools)) {
-//     json_array_append(res ,prefix);
-//     return;
-//   }
-//   json_t *pool = json_array_get(pools, offset);
-
-//   int i; json_t *item;
-//   json_array_foreach(pool,i,item) {
-//     json_t *array = json_copy(prefix);
-
-//     json_array_append_new(array,item);
-//     // json_t *sub = json_pack("[o]", item);
-//     // int k; json_t *item2;
-//     // json_array_foreach(sub,k,item2)
-//     //     json_array_append(array, item2);
-//     // json_decref(sub);
-
-//     cartesianProduct(array, pools, offset + 1, res);
-//   }
-// }
-
 
 void cartesianProduct(json_t *prefix, json_t *pools, size_t offset, json_t *res) {
     //3
@@ -143,6 +120,7 @@ json_t *parseVariations(json_t *schema, json_t *parent, const char *parent_key){
       else if (json_object_size(enum_props)) {
         json_t *enum_variations = objProduct(enum_props,variation_parent);
         json_array_extend(variations,enum_variations);
+        json_decref(enum_variations);
       }
       else json_array_append(variations, variation_parent);
 
