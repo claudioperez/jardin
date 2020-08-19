@@ -62,6 +62,7 @@ json_t *objProduct(json_t * obj, json_t * parent) {
   const char *k ; json_t * v;
   json_object_foreach(obj,k,v) json_array_append(dict_values,v);
   json_t *prod = product(dict_values);
+  json_decref(dict_values);
   json_t *out = json_array();
 
   size_t i; json_t *values;
