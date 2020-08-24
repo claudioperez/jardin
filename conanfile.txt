@@ -1,0 +1,6 @@
+[requires]
+jansson/2.11@bincrafters/stable
+
+[generators]
+make
+
