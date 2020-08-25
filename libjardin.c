@@ -40,6 +40,16 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 #include "jansson.h"
 
+//inline char get_parent(char *parent_key, char *prop_key)
+//{
+//   char key[strlen(parent_key) + strlen(prop_key) + 2];
+//   int i = 0;
+//   while (key[i] = *parent_key++) i++;
+//   if (parent_key) strcat(key, ".");
+//   strcat(key, prop_key);
+//   return key
+//}
+
 void cartesianProduct(json_t *prefix, json_t *pools, size_t index, json_t *res)
 {
     //3
@@ -119,8 +129,9 @@ json_t *parseVariations(json_t *schema, json_t *parent, const char *parent_key)
             json_t *prop_val;
             json_object_foreach(id_props, prop_key, prop_val) {
                 char key[strlen(parent_key) + strlen(prop_key) + 2];
-                strcpy(key, parent_key);
-                if (parent_key) strcat(key, ".");
+                int l = 0;
+                while( key[l] = *(parent_key+l) ) l++;
+                if (parent_key != "\0") strcat(key, ".");
                 strcat(key, prop_key);
                 json_object_set(variation_parent, key, json_object_get(prop_val, "const"));
             }
@@ -133,16 +144,22 @@ json_t *parseVariations(json_t *schema, json_t *parent, const char *parent_key)
             json_array_foreach(dp_props, j, prop_name) {
                 const char *prop_key = json_string_value(prop_name);
                 json_t *prop = json_object_get(properties, prop_key);
+               
+                char key[strlen(parent_key) + strlen(prop_key) + 2];
+                int l = 0;
+                while( key[l] = *(parent_key+l) ) l++;
+                if (parent_key != "\0") strcat(key, ".");
+                strcat(key, prop_key);
 
                 json_t *STR_OBJECT = json_string("object");
                 if (json_equal(json_object_get(prop, "type"), STR_OBJECT))
                     json_array_append(prop_schemas, prop_name);
 
                 else if (json_is_array(json_object_get(prop, "enum")))
-                    json_object_set(enum_props, prop_key, json_object_get(prop, "enum"));
+                    json_object_set(enum_props, key, json_object_get(prop, "enum"));
 
                 else if (json_object_get(prop, "default"))
-                    json_object_set(variation_parent, prop_key, json_object_get(prop, "default"));
+                    json_object_set(variation_parent, key, json_object_get(prop, "default"));
                 else {
                     printf("ERROR: Ambiguous Schema.");
                     exit(-1);
@@ -183,7 +200,6 @@ json_t *parseVariations(json_t *schema, json_t *parent, const char *parent_key)
             strcpy(key, parent_key);
             if (parent_key) strcat(key, ".");
             strcat(key, prop_key);
-
             json_t *STR_OBJECT = json_string("object");
             if (json_is_array(json_object_get(prop, "enum")))
                 json_object_set(enum_props, key, json_object_get(prop, "enum"));
