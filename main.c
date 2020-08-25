@@ -56,6 +56,7 @@ static struct argp_option options[] = {
     {"is-schema", 's', 0, 0, "Parse input file as JSON schema"},
     {"is-object", 'j', 0, 0, "Parse input file as JSON object"},
     {"is-array",  'a', 0, 0, "Parse input file as JSON array"},
+    {"key",       'k', "KEY", 0, "Specify key for JSON object"},
     {0, 0, 0, 0, "Operation:", -1},
     {"verbose", 'v', 0, 0, "Produce verbose output"},
     {"debug", 'd', 0, 0, "Produce output for debugging"},
@@ -68,7 +69,8 @@ struct arguments {
     char *argz;
     size_t argz_len;
     int verbose, flatout, debug, is_schema, is_object, is_array;
-    char *outfile;
+    char *outfile; 
+    char *key;
 };
 
 static error_t parse_opt(int key, char *arg, struct argp_state *state)
@@ -83,6 +85,7 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
   case 'd': arguments->debug = 1; break;
   case 'f': arguments->flatout = 1; break;
   case 'o': arguments->outfile = arg; break;
+  case 'k': arguments->key = arg; break;
   case ARGP_KEY_ARG:
     argz_add(&arguments->argz, &arguments->argz_len, arg);
     break;
@@ -112,6 +115,7 @@ int main(int argc, char **argv)
     FILE *outstream;
     arguments.verbose = 0;
     arguments.outfile = NULL;
+    arguments.key = NULL;
     arguments.debug = 0;
 
     arguments.is_schema = 1;
@@ -134,13 +138,19 @@ int main(int argc, char **argv)
             printf("Error: JSON loader failed to open file.\n");
             exit(-1);
         }
+        if (arguments.verbose) printf("-k: %s\n",arguments.key);
+        if (arguments.verbose) printf("-o: %s\n",arguments.outfile);
         if (arguments.is_object) {
-            if (arguments.verbose) printf("OBJECT\n");
+            if (arguments.verbose) printf("--is_object: true\n");
+            if (arguments.key)
+                rootSchema = json_object_get(rootSchema,arguments.key);
             variations = objProduct(rootSchema, parent);
         } else if (arguments.is_array) {
             if (arguments.verbose) printf("ARRAY\n");
             variations = product(rootSchema);
         } else if (arguments.is_schema) {
+            if (arguments.key)
+                rootSchema = json_object_get(json_object_get(rootSchema,"properties"),arguments.key);
             if (arguments.verbose) printf("SCHEMA\n");
             const char *parent_key = "\0";
             variations = parseVariations(rootSchema, parent, parent_key);
