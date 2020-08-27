@@ -1,0 +1,26 @@
+{
+ "options": [
+  [
+   "jansson:fPIC",
+   "True"
+  ],
+  [
+   "jansson:shared",
+   "False"
+  ],
+  [
+   "jansson:use_urandom",
+   "True"
+  ],
+  [
+   "jansson:use_windows_cryptoapi",
+   "True"
+  ]
+ ],
+ "root": {
+  "name": null,
+  "version": null,
+  "user": null,
+  "channel": null
+ }
+}

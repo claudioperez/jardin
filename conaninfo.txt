@@ -1,0 +1,36 @@
+[settings]
+    arch=x86_64
+    build_type=Release
+    compiler=gcc
+    compiler.version=9.3
+    os=Linux
+
+[requires]
+    jansson/2.Y.Z
+
+[options]
+
+
+[full_settings]
+    arch=x86_64
+    arch_build=x86_64
+    build_type=Release
+    compiler=gcc
+    compiler.version=9.3
+    os=Linux
+    os_build=Linux
+
+[full_requires]
+    jansson/2.11@bincrafters/stable:ab19ebc90a8d2444080ebceef9121ac2a2d4f30d
+
+[full_options]
+    jansson:fPIC=True
+    jansson:shared=False
+    jansson:use_urandom=True
+    jansson:use_windows_cryptoapi=True
+
+[recipe_hash]
+
+
+[env]
+

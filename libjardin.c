@@ -197,9 +197,12 @@ json_t *parseVariations(json_t *schema, json_t *parent, const char *parent_key)
         json_t *prop;
         json_object_foreach(properties, prop_key, prop) {
             char key[strlen(parent_key) + strlen(prop_key) + 2];
-            strcpy(key, parent_key);
-            if (parent_key) strcat(key, ".");
+            //strcpy(key, parent_key);
+            int l = 0;
+            while( key[l] = *(parent_key+l) ) l++;
+            if (parent_key != "\0") strcat(key, ".");
             strcat(key, prop_key);
+            
             json_t *STR_OBJECT = json_string("object");
             if (json_is_array(json_object_get(prop, "enum")))
                 json_object_set(enum_props, key, json_object_get(prop, "enum"));

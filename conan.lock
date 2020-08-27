@@ -1,0 +1,25 @@
+{
+ "graph_lock": {
+  "nodes": {
+   "0": {
+    "options": "jansson:fPIC=True\njansson:shared=False\njansson:use_urandom=True\njansson:use_windows_cryptoapi=True",
+    "requires": [
+     "1"
+    ],
+    "path": "conanfile.txt",
+    "context": "host"
+   },
+   "1": {
+    "ref": "jansson/2.11@bincrafters/stable",
+    "options": "fPIC=True\nshared=False\nuse_urandom=True\nuse_windows_cryptoapi=True",
+    "package_id": "ab19ebc90a8d2444080ebceef9121ac2a2d4f30d",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   }
+  },
+  "revisions_enabled": false
+ },
+ "version": "0.4",
+ "profile_host": "[settings]\narch=x86_64\narch_build=x86_64\nbuild_type=Release\ncompiler=gcc\ncompiler.version=9.3\nos=Linux\nos_build=Linux\n[options]\n[build_requires]\n[env]\n"
+}

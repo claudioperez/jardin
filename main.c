@@ -44,8 +44,8 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 #include "libjardin.h"
 
-const char *argp_program_version = "jardin-v0.0.1";
-const char *argp_program_bug_address = "<claudioperezii@outlook.com>";
+const char *argp_program_version = "jardin-v0.0.3";
+const char *argp_program_bug_address = "<claudio_perez@berkeley.edu>";
 static char doc[] = "Generate a JSON array of all possible objects that "
                     "satisfy a given schema satisfying a subset of JSON "
                     "schema draft 2019-09.";
