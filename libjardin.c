@@ -40,19 +40,9 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 #include "jansson.h"
 
-//inline char get_parent(char *parent_key, char *prop_key)
-//{
-//   char key[strlen(parent_key) + strlen(prop_key) + 2];
-//   int i = 0;
-//   while (key[i] = *parent_key++) i++;
-//   if (parent_key) strcat(key, ".");
-//   strcat(key, prop_key);
-//   return key
-//}
 
 void cartesianProduct(json_t *prefix, json_t *pools, size_t index, json_t *res)
 {
-    //3
     if (index >= json_array_size(pools))
         json_array_append(res, prefix);
     else {
