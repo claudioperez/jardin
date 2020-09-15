@@ -5,11 +5,11 @@ description: A C/C++ library and command-line utility for recursively generating
 
 <h1><img src="main.svg" alt="" width=75></img>jardín</h1>
 
-A C/C++ library and command line utility for recursively generating variations of JSON structures.
+A C/C++ library and command line utility for recursively generating variations of JSON structures and schemas.
 
 -----
 
-Jardín recursively walks a given JSON structure and generates an array of all possible variations. 
+Jardín recursively walks a given JSON structure or schema and generates an array of all possible variations. This tool was developed to help generate test beds for validation and verification of programs that are configured using JSON files.
 
 
     $ jardin --help
@@ -36,7 +36,7 @@ Jardín recursively walks a given JSON structure and generates an array of all p
     Mandatory or optional arguments to long options are also mandatory or optional
     for any corresponding short options.
 
-## Examples
+<!-- ## Examples
 
 ### Arrays
 
@@ -61,6 +61,7 @@ Jardín recursively walks a given JSON structure and generates an array of all p
       {"seed": 3, "method": "lhs"},
       {"seed": 3, "method": "monte carlo"}
     ]
+-->
 
 ## To-Do
 
