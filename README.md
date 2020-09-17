@@ -1,9 +1,12 @@
 ---
 title: jardín
 description: A C/C++ library and command-line utility for recursively generating variations of JSON structures.
+github: https://github.com/claudioperez/jardin
 ...
 
 <h1><img src="main.svg" alt="" width=75></img>jardín</h1>
+
+[![Commits since latest release][gh-commits]][gh-link]
 
 A C/C++ library and command line utility for recursively generating variations of JSON structures and schemas.
 
@@ -69,3 +72,8 @@ Jardín recursively walks a given JSON structure or schema and generates an arra
 - [ ] fix field names.
 - [ ] add ability to nest flat json file.
 
+[gh-link]: https://github.com/claudioperez/jardin/
+[gh-commits]: https://img.shields.io/github/commits-since/claudioperez/jardin/v0.0.1?style=social
+
+
+<!-- ![GitHub commits since tagged version](https://img.shields.io/github/commits-since/claudioperez/jardin/v0.0.1?style=social) -->
