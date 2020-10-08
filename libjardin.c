@@ -193,7 +193,6 @@ json_t *parseVariations(json_t *schema, json_t *parent, const char *parent_key)
             json_t *STR_OBJECT = json_string("object");
             if (json_is_array(json_object_get(prop, "enum")))
                 json_object_set(enum_props, key, json_object_get(prop, "enum"));
-
             else if (!json_equal(json_object_get(prop, "type"), STR_OBJECT) && json_object_get(prop, "default"))
                 json_object_set(variation_parent, key, json_object_get(prop, "default"));
             json_decref(STR_OBJECT);
